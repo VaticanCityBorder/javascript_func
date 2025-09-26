@@ -1,12 +1,70 @@
+html {
+    padding: 2%;
+    background-color: rgb(255, 245, 230);
+}
+
 table, th, td {
-    border: 1px dotted red;
+    border: 1px dotted black;
     border-collapse: collapse;
 }
 
 tr td:last-child {
-    background-color: bisque;
+    background-color: red;
 }
 
 tr td:nth-last-child(3) {
-    background-color: bisque;
+    background-color: green;
+}
+
+#gyakorlas {
+    margin-top: 3%;
+    padding: 2%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+    background-color: orange;
+}
+
+button {
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 1%;
+    font-size: 120%;
+}
+
+button:has(+p) {
+    background-color: salmon;
+}
+
+button:not(:has(+p)) {
+    background-color: yellow;
+}
+
+
+#gyakorlas:has(+a:hover) button {
+    color: red;
+}
+
+a[href] {
+    color: white;
+    background-color: brown;
+}
+
+tr:not(:has(td[rowspan])) + tr:not(:has(td[rowspan])):hover td {
+    background-color: rebeccapurple;
+}
+
+tr:has(td[rowspan]):hover td {
+    background-color: rebeccapurple;
+}
+
+tr:has(td[rowspan]):hover + tr td {
+    background-color: rebeccapurple;
+}
+
+tr:has(td[rowspan]):has(+tr:hover) td {
+    background-color: rebeccapurple;
+}
+
+tr:has(td[rowspan]) + tr:hover td {
+    background-color: rebeccapurple;
 }

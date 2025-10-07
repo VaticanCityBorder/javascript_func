@@ -68,18 +68,18 @@ for (let i = 0; i < arr.length; i++) {
     tdTime.innerText = jelenlegiSor.time;
     tr.appendChild(tdTime);
 
-    // Harmdaik cella
+    // Harmadik cella
     const tdScientist1 = document.createElement("td");
     tdScientist1.innerText = jelenlegiSor.scientist1;
 
-    // Nincs scientist2 → colSpan = 2
+    // Ha nincs scientist2 akkor colSpan = 2 és nem kell több cella
     if (jelenlegiSor.scientist2 === undefined) {
         tdScientist1.colSpan = 2; 
         tr.appendChild(tdScientist1);
     } else {
         tr.appendChild(tdScientist1);
-
-        // Ha van scientist akkor nyilván kell mégegy cella
+        
+        // Ha van scientist2 akkor kell negyedik cella is
         const tdScientist2 = document.createElement("td");
         tdScientist2.innerText = jelenlegiSor.scientist2;
         tr.appendChild(tdScientist2);

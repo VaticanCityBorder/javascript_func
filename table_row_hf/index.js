@@ -33,11 +33,11 @@ const arr = [
 const table = document.createElement("table");
 const thead = document.createElement("thead");
 const tbody = document.createElement("tbody");
-const headerRow = document.createElement("tr");
+const fejlecSor = document.createElement("tr");
 
 document.body.appendChild(table);
 table.appendChild(thead);
-thead.appendChild(headerRow);
+thead.appendChild(fejlecSor);
 table.appendChild(tbody);
 
 const fejlecSzoveg = ["Harc megnevezése", "Szembenálló felek", "Haderő"];
@@ -45,7 +45,7 @@ const fejlecSzoveg = ["Harc megnevezése", "Szembenálló felek", "Haderő"];
 for (const elem of fejlecSzoveg) {
     const th = document.createElement("th");
     th.innerText = elem;
-    headerRow.appendChild(th);
+    fejlecSor.appendChild(th);
 }
 
 for (const elem of arr) {

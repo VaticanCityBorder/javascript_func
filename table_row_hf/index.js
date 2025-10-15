@@ -1,5 +1,5 @@
 /**
- * @type {war:string,team1:string,team1Size:number,team2:string,team2Size:number}
+ * @type {war:string,team1:string,team1Size:number,team2?:string,team2Size?:number}
  */
 const arr = [
     {
@@ -25,47 +25,57 @@ const arr = [
     },
     {
         war: 'Bosworthi csata',
-        team1: 'Angolok (York + Lancester)',
+        team1: 'Angolok (York + Lancaster)',
         team1Size: '15.000',
     }
-]
+];
 
 const table = document.createElement("table");
 const thead = document.createElement("thead");
 const tbody = document.createElement("tbody");
-const tr = document.createElement("tr");
+const headerRow = document.createElement("tr");
 
 document.body.appendChild(table);
 table.appendChild(thead);
-thead.appendChild(tr);
+thead.appendChild(headerRow);
 table.appendChild(tbody);
 
-const fejlecSzoveg = ["Harc megnevezése", "Szembenálló felek", "Haderő"]
+const fejlecSzoveg = ["Harc megnevezése", "Szembenálló felek", "Haderő"];
 
 for (const elem of fejlecSzoveg) {
     const th = document.createElement("th");
     th.innerText = elem;
-    tr.appendChild(th);
+    headerRow.appendChild(th);
 }
 
-for (let i = 0; i < arr.length; i++) {
-    const td1 = document.createElement("td");
-    const td2 = document.createElement("td");
-    const td3 = document.createElement("td");
-    const tr = document.createElement("tr");
+for (const elem of arr) {
+    const tr1 = document.createElement("tr");
 
-    tbody.appendChild(tr);
+    const tdWar = document.createElement("td");
+    const tdTeam1 = document.createElement("td");
+    const tdTeam1Size = document.createElement("td");
 
-    td1.innerText = arr[i].war;
-    td2.innerText = arr[i].team1;
-    td3.innerText = arr[i].team1Size;
+    tdWar.innerText = elem.war;
+    tdTeam1.innerText = elem.team1;
+    tdTeam1Size.innerText = elem.team1Size;
 
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tr.appendChild(td3);
+    tr1.appendChild(tdWar);
+    tr1.appendChild(tdTeam1);
+    tr1.appendChild(tdTeam1Size);
+    tbody.appendChild(tr1);
 
-    // if (elem.team2 && elem.team2Size) {
-    //     const tr = document.createElement("tr");
+    if (elem.team2 && elem.team2Size) {
+        const tr2 = document.createElement("tr");
+        const tdTeam2 = document.createElement("td");
+        const tdTeam2Size = document.createElement("td");
 
-    // }
+        tdTeam2.innerText = elem.team2;
+        tdTeam2Size.innerText = elem.team2Size;
+
+        tdWar.rowSpan = 2;
+
+        tr2.appendChild(tdTeam2);
+        tr2.appendChild(tdTeam2Size);
+        tbody.appendChild(tr2);
+    }
 }

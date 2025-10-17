@@ -128,3 +128,15 @@ for (let i = 0; i < arr.length; i++) {
 
     tbody.appendChild(tr);
 }
+
+/**
+ * Hozzáad egy cellát egy adott sorhoz.
+ * @param {string} cellType Lehet `"th"` vagy `"td"`.
+ * @param {string} cellContent A cella szöveges tartalma.
+ * @param {HTMLTableRowElement} parentRow A sor amihez hozzáadjuk.
+ */
+function createCell(cellType, cellContent, parentRow) {
+    const cell = document.createElement(cellType);
+    cell.innerText = cellContent;
+    parentRow.appendChild(cell);
+};

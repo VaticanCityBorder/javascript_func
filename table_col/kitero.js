@@ -82,18 +82,12 @@ const thead = document.createElement("thead");
 const tbody = document.createElement("tbody");
 
 const trHead = document.createElement("tr");
-const th1 = document.createElement("th");
-const th2 = document.createElement("th");
-const th3 = document.createElement("th");
 
-th1.innerText = "Szerző neve";
-th2.innerText = "Korszak";
-th3.innerText = "Szerelmek";
-th3.colSpan = 2;
+createCell("th", "Szerző neve", trHead);
+createCell("th", "Korszak", trHead);
+const cella = createCell("th", "Szerelmek", trHead);
+cella.colSpan = 2;
 
-trHead.appendChild(th1);
-trHead.appendChild(th2);
-trHead.appendChild(th3);
 thead.appendChild(trHead);
 
 table.appendChild(thead);
@@ -104,13 +98,8 @@ for (let i = 0; i < arr.length; i++) {
     const jelenlegiSor = arr[i];
     const tr = document.createElement("tr");
 
-    const tdname = document.createElement("td");
-    tdname.innerText = jelenlegiSor.name;
-    tr.appendChild(tdname);
-
-    const tdTime = document.createElement("td");
-    tdTime.innerText = jelenlegiSor.era;
-    tr.appendChild(tdTime);
+    createCell("td", jelenlegiSor.name, tr)
+    createCell("td", jelenlegiSor.era, tr);
 
     const tdLove = document.createElement("td");
     tdLove.innerText = jelenlegiSor.love;
@@ -121,9 +110,7 @@ for (let i = 0; i < arr.length; i++) {
     } else {
         tr.appendChild(tdLove);
         
-        const tdLove2 = document.createElement("td");
-        tdLove2.innerText = jelenlegiSor.love2;
-        tr.appendChild(tdLove2);
+        createCell("td", jelenlegiSor.love2, tr)
     }
 
     tbody.appendChild(tr);
@@ -134,9 +121,11 @@ for (let i = 0; i < arr.length; i++) {
  * @param {string} cellType Lehet `"th"` vagy `"td"`.
  * @param {string} cellContent A cella szöveges tartalma.
  * @param {HTMLTableRowElement} parentRow A sor amihez hozzáadjuk.
+ * @returns {HTMLTableCellElement}
  */
 function createCell(cellType, cellContent, parentRow) {
     const cell = document.createElement(cellType);
     cell.innerText = cellContent;
     parentRow.appendChild(cell);
+    return cell;
 };

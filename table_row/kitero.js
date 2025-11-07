@@ -157,5 +157,51 @@ elem.addEventListener("submit",
          * @type {nemzet:string,iro1:string,mu1:string,iro2?:string,mu2?:string}
          */
         const obj = {}
+
+        obj.nemzet = nemzetisegValue;
+        obj.iro1 = szerzo1Value;
+        obj.mu1 = mu1Value;
+        obj.iro2 = szerzo2Value;
+        obj.mu2 = mu2Value;
+
+        const tbodyId = document.getElementById("tbody");
+
+        const tr1 = document.createElement("tr");
+
+        const tdNemzet = document.createElement("td");
+        const tdIro1 = document.createElement("td");
+        const tdMu1 = document.createElement("td");
+
+        tdNemzet.innerText = obj.nemzet;
+        tdIro1.innerText = obj.iro1;
+        tdMu1.innerText = obj.mu1;
+
+        tr1.appendChild(tdNemzet);
+        tr1.appendChild(tdIro1);
+        tr1.appendChild(tdMu1);
+        tbodyId.appendChild(tr1);
+
+        tdNemzet.addEventListener("click",
+            function (e) {
+                const target1 = e.target;
+                target1.classList.add("marked")
+            }
+        );
+
+        if (obj.iro2 && obj.mu2) {
+            const tr2 = document.createElement("tr");
+            const tdIro2 = document.createElement("td");
+            const tdMu2 = document.createElement("td");
+
+            tdIro2.innerText = obj.iro2;
+            tdMu2.innerText = obj.mu2;
+
+            tdNemzet.rowSpan = 2;
+
+            tr2.appendChild(tdIro2);
+            tr2.appendChild(tdMu2);
+            tbodyId.appendChild(tr2);
+        }
+
     }
 )

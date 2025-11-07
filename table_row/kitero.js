@@ -76,6 +76,13 @@ for (const elem of arr) {
     tr1.appendChild(tdMu1);
     tbody.appendChild(tr1);
 
+    tdNemzet.addEventListener("click",
+        function (e) {
+            const target1 = e.target;
+            target1.classList.add("marked")
+        }
+    );
+
     if (elem.iro2 && elem.mu2) {
         const tr2 = document.createElement("tr");
         const tdIro2 = document.createElement("td");
@@ -91,3 +98,64 @@ for (const elem of arr) {
         tbody.appendChild(tr2);
     }
 }
+
+/**
+ * @type {HTMLElement}
+ */
+const elem = document.getElementById("htmlform");
+elem.addEventListener("submit",
+    function (e) {
+        e.preventDefault();
+        const formTarget = e.target;
+
+        /**
+         * @type {HTMLInputElement}
+         */
+        const nemzetiseg = formTarget.querySelector("#nemzetiseg");
+        /**
+         * @type {string}
+         */
+        const nemzetisegValue = nemzetiseg.value;
+
+        /**
+         * @type {HTMLInputElement}
+         */
+        const szerzo1 = formTarget.querySelector("#szerzo1");
+        /**
+         * @type {string}
+         */
+        const szerzo1Value = szerzo1.value;
+
+        /**
+         * @type {HTMLInputElement}
+         */
+        const mu1 = formTarget.querySelector("#mu1");
+        /**
+         * @type {string}
+         */
+        const mu1Value = mu1.value;
+
+        /**
+         * @type {HTMLInputElement}
+         */
+        const szerzo2 = formTarget.querySelector("#szerzo2");
+        /**
+         * @type {string}
+         */
+        const szerzo2Value = szerzo2.value;
+
+        /**
+         * @type {HTMLInputElement}
+         */
+        const mu2 = formTarget.querySelector("#mu2");
+        /**
+         * @type {string}
+         */
+        const mu2Value = mu2.value;
+
+        /**
+         * @type {nemzet:string,iro1:string,mu1:string,iro2?:string,mu2?:string}
+         */
+        const obj = {}
+    }
+)

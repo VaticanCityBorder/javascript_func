@@ -1,17 +1,3 @@
-// const objektum = {}
-
-// const szam = 13;
-
-// if (szam > 5) {
-//     objektum.name = "Abdul Allah";
-// }
-// else {
-//     objektum["name"] = "Diddy";
-// }
-
-// console.log(objektum.name);
-
-
 /**
  * @type {nemzet:string,iro1:string,mu1:string,iro2?:string,mu2?:string}
  */
@@ -42,166 +28,94 @@ const arr = [
     }
 ];
 
-const table = document.createElement("table");
-const thead = document.createElement("thead");
-const tbody = document.createElement("tbody");
-const fejlecSor = document.createElement("tr");
+const table2 = document.createElement("table");
+const thead2 = document.createElement("thead");
+const tbody2 = document.createElement("tbody");
+tbody2.id = "js-tbody";
 
-document.body.appendChild(table);
-table.appendChild(thead);
-thead.appendChild(fejlecSor);
-table.appendChild(tbody);
+const fejlecSor2 = document.createElement("tr");
+const fejlecSzoveg2 = ["Nemzetiség", "Szerző", "Mű"];
 
-const fejlecSzoveg = ["Nemzetiség", "Szerző", "Mű"];
-
-for (const elem of fejlecSzoveg) {
+for (const elem of fejlecSzoveg2) {
     const th = document.createElement("th");
     th.innerText = elem;
-    fejlecSor.appendChild(th);
+    fejlecSor2.appendChild(th);
 }
 
-for (const elem of arr) {
-    const tr1 = document.createElement("tr");
+thead2.appendChild(fejlecSor2);
+table2.appendChild(thead2);
+table2.appendChild(tbody2);
 
-    const tdNemzet = document.createElement("td");
-    const tdIro1 = document.createElement("td");
-    const tdMu1 = document.createElement("td");
-
-    tdNemzet.innerText = elem.nemzet;
-    tdIro1.innerText = elem.iro1;
-    tdMu1.innerText = elem.mu1;
-
-    tr1.appendChild(tdNemzet);
-    tr1.appendChild(tdIro1);
-    tr1.appendChild(tdMu1);
-    tbody.appendChild(tr1);
-
-    tdNemzet.addEventListener("click",
-        function (e) {
-            const target1 = e.target;
-            target1.classList.add("marked")
-        }
-    );
-
-    if (elem.iro2 && elem.mu2) {
-        const tr2 = document.createElement("tr");
-        const tdIro2 = document.createElement("td");
-        const tdMu2 = document.createElement("td");
-
-        tdIro2.innerText = elem.iro2;
-        tdMu2.innerText = elem.mu2;
-
-        tdNemzet.rowSpan = 2;
-
-        tr2.appendChild(tdIro2);
-        tr2.appendChild(tdMu2);
-        tbody.appendChild(tr2);
-    }
-}
+document.body.appendChild(table2);
 
 /**
- * @type {HTMLElement}
+ * Kitölti a JS-es táblázatot a megadott array alapján
+ * @param {Array{nemzet:string, iro1:string, mu1:string, iro2?:string, mu2?:string}} data
  */
-const elem = document.getElementById("htmlform");
-elem.addEventListener("submit",
-    function (e) {
-        e.preventDefault();
-        const formTarget = e.target;
+function renderTableBody(data) {
+    const tbody = document.getElementById("js-tbody");
+    tbody.innerHTML = "";
 
-        /**
-         * @type {HTMLInputElement}
-         */
-        const nemzetiseg = formTarget.querySelector("#nemzetiseg");
-        /**
-         * @type {string}
-         */
-        const nemzetisegValue = nemzetiseg.value;
-
-        /**
-         * @type {HTMLInputElement}
-         */
-        const szerzo1 = formTarget.querySelector("#szerzo1");
-        /**
-         * @type {string}
-         */
-        const szerzo1Value = szerzo1.value;
-
-        /**
-         * @type {HTMLInputElement}
-         */
-        const mu1 = formTarget.querySelector("#mu1");
-        /**
-         * @type {string}
-         */
-        const mu1Value = mu1.value;
-
-        /**
-         * @type {HTMLInputElement}
-         */
-        const szerzo2 = formTarget.querySelector("#szerzo2");
-        /**
-         * @type {string}
-         */
-        const szerzo2Value = szerzo2.value;
-
-        /**
-         * @type {HTMLInputElement}
-         */
-        const mu2 = formTarget.querySelector("#mu2");
-        /**
-         * @type {string}
-         */
-        const mu2Value = mu2.value;
-
-        /**
-         * @type {nemzet:string,iro1:string,mu1:string,iro2?:string,mu2?:string}
-         */
-        const obj = {}
-
-        obj.nemzet = nemzetisegValue;
-        obj.iro1 = szerzo1Value;
-        obj.mu1 = mu1Value;
-        obj.iro2 = szerzo2Value;
-        obj.mu2 = mu2Value;
-
-        const tbodyId = document.getElementById("tbody");
-
+    for (const elem of data) {
         const tr1 = document.createElement("tr");
 
         const tdNemzet = document.createElement("td");
         const tdIro1 = document.createElement("td");
         const tdMu1 = document.createElement("td");
 
-        tdNemzet.innerText = obj.nemzet;
-        tdIro1.innerText = obj.iro1;
-        tdMu1.innerText = obj.mu1;
+        tdNemzet.innerText = elem.nemzet;
+        tdIro1.innerText = elem.iro1;
+        tdMu1.innerText = elem.mu1;
 
         tr1.appendChild(tdNemzet);
         tr1.appendChild(tdIro1);
         tr1.appendChild(tdMu1);
-        tbodyId.appendChild(tr1);
+        tbody.appendChild(tr1);
 
-        tdNemzet.addEventListener("click",
-            function (e) {
-                const target1 = e.target;
-                target1.classList.add("marked")
-            }
-        );
+        tdNemzet.addEventListener("click", (e) => {
+            e.target.classList.add("marked");
+        });
 
-        if (obj.iro2 && obj.mu2) {
+        if (elem.iro2 && elem.mu2) {
             const tr2 = document.createElement("tr");
             const tdIro2 = document.createElement("td");
             const tdMu2 = document.createElement("td");
 
-            tdIro2.innerText = obj.iro2;
-            tdMu2.innerText = obj.mu2;
+            tdIro2.innerText = elem.iro2;
+            tdMu2.innerText = elem.mu2;
 
             tdNemzet.rowSpan = 2;
 
             tr2.appendChild(tdIro2);
             tr2.appendChild(tdMu2);
-            tbodyId.appendChild(tr2);
+            tbody.appendChild(tr2);
         }
-
     }
-)
+}
+
+renderTableBody(arr);
+
+const form = document.getElementById("htmlform");
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const nemzetisegValue = form.querySelector("#nemzetiseg").value;
+    const szerzo1Value = form.querySelector("#szerzo1").value;
+    const mu1Value = form.querySelector("#mu1").value;
+    const szerzo2Value = form.querySelector("#szerzo2").value;
+    const mu2Value = form.querySelector("#mu2").value;
+
+    const obj = {
+        nemzet: nemzetisegValue,
+        iro1: szerzo1Value,
+        mu1: mu1Value,
+    };
+
+    if (szerzo2Value && mu2Value) {
+        obj.iro2 = szerzo2Value;
+        obj.mu2 = mu2Value;
+    }
+
+    arr.push(obj);
+    renderTableBody(arr);
+});

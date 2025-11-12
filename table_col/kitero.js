@@ -129,3 +129,38 @@ function createCell(cellType, cellContent, parentRow) {
     parentRow.appendChild(cell);
     return cell;
 };
+
+const form = document.createElement("form");
+form.id = "form_js";
+
+const h2 = document.createElement("h2");
+h2.innerText = "Javascript űrlap";
+form.appendChild(h2);
+
+function createInput(labelText, inputId) {
+    const label = document.createElement("label");
+    label.setAttribute("for", inputId);
+    label.innerText = labelText;
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = inputId;
+    input.name = inputId;
+
+    form.appendChild(label);
+    form.appendChild(document.createElement("br"));
+    form.appendChild(input);
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement("br"));
+}
+
+createInput("Költő neve:", "kolto_nev");
+createInput("Korszak:", "korszak");
+createInput("Szerelme:", "szerelem1");
+createInput("Szerelme:", "szerelem2");
+
+const button = document.createElement("button");
+button.innerText = "Hozzáadás";
+form.appendChild(button);
+
+document.body.appendChild(form);

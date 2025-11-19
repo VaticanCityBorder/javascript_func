@@ -1,4 +1,5 @@
 /**
+ * A JS táblázathoz szükséges adatok.
  * @type CountryWriters[]
  */
 const arr = [
@@ -28,41 +29,56 @@ const arr = [
     }
 ];
 
-const table = document.createElement("table");
-const thead = document.createElement("thead");
-const tbody = document.createElement("tbody");
-tbody.id = "js-tbody";
+/**
+ * A JS táblázathoz szükséges adatok.
+ * @type {}
+ */
+const globalObj = {
+    tableHeaders: ["Nemzetiség", "Szerző", "Mű"],
+    formFields: [
+        { id: "nemzet", label: "Nemzetiség" },
+        { id: "szerzo1", label: "Szerző" },
+        { id: "mu1", label: "Mű" },
+        { id: "szerzo2", label: "Másik szerző" },
+        { id: "mu2", label: "Mű" }
+    ]
+};
 
-const fejlecSzoveg = ["Nemzetiség", "Szerző", "Mű"];
-generateHeader(table, fejlecSzoveg);
-
-table.appendChild(tbody);
-document.body.appendChild(table);
-
+// JS táblázat
+generateTable(globalObj.tableHeaders, "js-tbody");
 renderTable(arr);
 
-const form = document.getElementById("htmlform");
+// HTML form
+const htmlForm = document.getElementById("htmlform");
+htmlForm.addEventListener("submit", htmlEventListener);
 
-form.addEventListener("submit", function (e) {
+// JS form
+const jsForm = createForm("js_form", globalObj.formFields);
+document.body.appendChild(jsForm);
+
+jsForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    
-    const nemzetisegValue = form.querySelector("#nemzetiseg").value;
-    const szerzo1Value = form.querySelector("#szerzo1").value;
-    const mu1Value = form.querySelector("#mu1").value;
-    const szerzo2Value = form.querySelector("#szerzo2").value;
-    const mu2Value = form.querySelector("#mu2").value;
-    
-    const obj = {
-        nemzet: nemzetisegValue,
-        iro1: szerzo1Value,
-        mu1: mu1Value,
-    };
-    
-    if (szerzo2Value && mu2Value) {
-        obj.iro2 = szerzo2Value;
-        obj.mu2 = mu2Value;
+
+    const form = e.target;
+
+    const nemzet = form.querySelector("#nemzet");
+    const szerzo1 = form.querySelector("#szerzo1");
+    const mu1 = form.querySelector("#mu1");
+    const szerzo2 = form.querySelector("#szerzo2");
+    const mu2 = form.querySelector("#mu2");
+
+    if (validateFields(nemzet, szerzo1, mu1, "js_form")) {
+
+        const obj = {
+            nemzet: nemzet.value,
+            iro1: szerzo1.value,
+            mu1: mu1.value,
+            iro2: szerzo2.value !== "" ? szerzo2.value : undefined,
+            mu2: mu2.value !== "" ? mu2.value : undefined
+        };
+
+        arr.push(obj);
+        renderTable(arr);
+        jsForm.reset();
     }
-    
-    arr.push(obj);
-    renderTable(arr);
 });

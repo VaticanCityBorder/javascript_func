@@ -73,3 +73,8 @@ tr:has(td[rowspan]) + tr:hover td {
 .marked {
     color: red;
 }
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}

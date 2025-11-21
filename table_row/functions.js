@@ -205,7 +205,7 @@ function validateFields(input1, input2, input3, formId) {
  * @returns 
  */
 function validateField(input, msg) {
-    if (input.value.trim() === "") {
+    if (input.value.trim() == "") {
         const span = input.parentElement.querySelector(".error");
         span.innerText = msg;
         return false;
